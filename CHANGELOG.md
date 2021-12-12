@@ -2,6 +2,7 @@
 
 ## 0.2.0-SNAPSHOT
 - add column gid to users table.
+- can login.
 
 ## 0.1.0 - 2021-12-12
 - project started.

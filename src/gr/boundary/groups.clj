@@ -2,8 +2,8 @@
   (:require
    [environ.core :refer [env]]
    [next.jdbc :refer [get-connection]]
+   [next.jdbc.sql :as sql]
    [next.jdbc.result-set :as rs]
-   [next.jdbc.sql :refer [query]]
    [taoensso.timbre :refer [debug]]))
 
 (def db {:dbtype   "postgresql"
@@ -15,3 +15,9 @@
 
 (def ds (get-connection db))
 
+(defn find-user [user]
+  (sql/query ds ["select * from groups where member like ?"
+                 (str "%" user "%")]))
+
+(defn create [users]
+  (sql/insert! ds :groups {:members users}))

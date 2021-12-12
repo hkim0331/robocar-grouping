@@ -49,3 +49,14 @@
     (password-field {:placeholder "パスワード"} "password")
     (submit-button "login"))))
 
+(defn new-group []
+  (page
+   [:h2 "gr: New"]
+   [:p "１グループは 3 人。複数のグループにはもちろん所属できない。"
+       "グループ代表者ひとりがメンバのユーザ名（半角、区切りは半角スペース）を正確に入力後、"
+       "create を押してください。追加、削除、修正はめんどくさいので、変更のないように。"]
+   (form-to
+    [:post "/group"]
+    (anti-forgery-field)
+    (text-field {:placeholder "ユーザ名を半角で区切って3人分。"} "users")
+    (submit-button {:class "btn btn-danger btn-sm"} "create"))))

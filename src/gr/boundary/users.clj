@@ -3,7 +3,7 @@
    [environ.core :refer [env]]
    [next.jdbc :refer [get-connection]]
    [next.jdbc.result-set :as rs]
-   [next.jdbc.sql :refer [query]]
+   [next.jdbc.sql :refer [query update!]]
    [taoensso.timbre :refer [debug]]))
 
 (def db {:dbtype   "postgresql"
@@ -21,3 +21,6 @@
              ["select * from users where login=?" login]
              {:builder-fn rs/as-unqualified-lower-maps})]
     (-> ret first)))
+
+(defn update-gid [user gid]
+  (update! ds :users {:gid gid} ["login=?" user]))
