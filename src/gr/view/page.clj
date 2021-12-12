@@ -75,5 +75,11 @@
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
-   (format "<p>%2d (%s) %s</p>" (:id g) (:uhour g) (:members g)))
-  [:p [:a {:href "/group" :class "btn btn-primary btn-sm"} "new group"]]))
+   [:p
+    (:id g) "&nbsp;"
+    "(" (:uhour g) ") &nbsp;"
+    (:members g)
+    "&nbsp;"
+    [:a {:href (str "/delete/" (:id g))} "del"]])
+  [:p [:a {:href "/group" :class "btn btn-primary btn-sm"}
+          "new group"]]))

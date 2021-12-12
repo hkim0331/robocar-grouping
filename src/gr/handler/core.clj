@@ -47,10 +47,12 @@
   (fn [{[_] :ataraxy/result}]
     [::response/ok "group"]))
 
-(defmethod ig/init-key :gr.handler.core/update [_ options]
-  (fn [{[_] :ataraxy/result}]
-    [::response/ok "update"]))
+#_(defmethod ig/init-key :gr.handler.core/update [_ options]
+    (fn [{[_] :ataraxy/result}]
+      [::response/ok "update"]))
 
 (defmethod ig/init-key :gr.handler.core/delete [_ options]
-  (fn [{[_] :ataraxy/result}]
-    [::response/ok "delete"]))
+  (fn [{[_ n] :ataraxy/result}]
+    (groups/delete n)
+    (users/delete n)
+    [::response/found "/groups"]))
