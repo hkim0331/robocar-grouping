@@ -6,7 +6,8 @@
             [gr.boundary.users :as users]
             [gr.boundary.groups :as groups]
             [gr.view.page :as page]
-            [integrant.core :as ig]))
+            [integrant.core :as ig]
+            [taoensso.timbre :as timbre]))
 
 (defmethod ig/init-key :gr.handler.core/groups [_ options]
   (fn [{[_] :ataraxy/result}]
@@ -27,16 +28,17 @@
       (when (groups/find-user u)
         (throw (Exception. (str u " already belong to other group")))))))
 
-(defn- create-group [users]
-  (let [gid (groups/create users)]
+(defn- create-group [uhour users]
+  (let [gid (groups/create uhour users)]
     (doseq [u (str/split users #"\s")]
       (users/update-gid u gid))))
 
 (defmethod ig/init-key :gr.handler.core/create [_ options]
-  (fn [{[_ {:strs [users]}] :ataraxy/result}]
+  (fn [{[_ {:strs [uhour users]}] :ataraxy/result :as req}]
+    (timbre/debug "uhour" uhour)
     (try
       (validate users)
-      (create-group users)
+      (create-group uhour users)
       [::response/found "/groups"]
       (catch Exception e
         (page/error (str e))))))

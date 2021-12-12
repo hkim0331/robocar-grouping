@@ -4,7 +4,8 @@
    [clojure.string :as str]
    [hiccup.page :refer [html5]]
    [hiccup.form :refer [form-to text-field password-field submit-button
-                        label text-area file-upload hidden-field]]
+                        label text-area file-upload hidden-field
+                        radio-button]]
    [hiccup.util :refer [escape-html]]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
@@ -62,6 +63,10 @@
    (form-to
     [:post "/group"]
     (anti-forgery-field)
+    [:p "class: " (radio-button "uhour" false "tue1") "tue1 "
+        (radio-button "uhour" false "tue2") "tue2 "
+        (radio-button "uhour" false "thr1") "thr1 "
+        (radio-button "uhour" false "thr2") "thr2 "]
     (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
                 "users")
     (submit-button {:class "btn btn-danger btn-sm"} "create"))))
@@ -70,5 +75,5 @@
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
-   (str "<p>" (:id g) "&nbsp;" (:members g) "</p>"))
+   (format "<p>%2d (%s) %s</p>" (:id g) (:uhour g) (:members g)))
   [:p [:a {:href "/group" :class "btn btn-primary btn-sm"} "new group"]]))

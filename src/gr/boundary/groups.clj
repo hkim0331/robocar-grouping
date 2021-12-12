@@ -20,8 +20,8 @@
                             (str "%" user "%")])]
     (seq ret)))
 
-(defn create [users]
-  (let [ret (sql/insert! ds :groups {:members users}
+(defn create [uhour users]
+  (let [ret (sql/insert! ds :groups {:uhour uhour :members users}
                          {:builder-fn rs/as-unqualified-lower-maps})]
     (:id ret)))
 
