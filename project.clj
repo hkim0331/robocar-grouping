@@ -12,6 +12,7 @@
                  [buddy/buddy-hashers "1.8.1"]
                  [com.github.seancorfield/next.jdbc "1.2.753"]
                  [com.taoensso/timbre "5.1.2"]
+                 [environ/environ "1.2.0"]
                  [org.postgresql/postgresql "42.2.19"]]
   :plugins [[duct/lein-duct "0.12.3"]]
   :main ^:skip-aot gr.main
