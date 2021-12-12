@@ -24,3 +24,7 @@
   (let [ret (sql/insert! ds :groups {:members users}
                          {:builder-fn rs/as-unqualified-lower-maps})]
     (:id ret)))
+
+(defn list-groups []
+  (sql/query ds ["select * from groups order by id"]
+                {:builder-fn rs/as-unqualified-lower-maps}))
