@@ -1,4 +1,4 @@
-(ns qa.boundary.users
+(ns gr.boundary.users
   (:require
    [environ.core :refer [env]]
    [next.jdbc :refer [get-connection]]

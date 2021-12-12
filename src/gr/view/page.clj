@@ -41,12 +41,11 @@
 (defn login-page []
   (page
    [:h2 "gr: Login"]
-   [:p "r99.melt と同じやつで。"
-    [:a {:href "/"} "注意事項"]]
+   [:p "r99.melt と同じやつで。"]
    (form-to
     [:post "/login"]
     (anti-forgery-field)
-    (text-field {:placeholder "ニックネーム"} "nick")
+    (text-field {:placeholder "ユーザ名"} "login")
     (password-field {:placeholder "パスワード"} "password")
     (submit-button "login"))))
 
