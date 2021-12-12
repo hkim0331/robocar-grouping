@@ -1,9 +1,9 @@
-(ns gr.boundary.users
+(ns gr.boundary.groups
   (:require
    [environ.core :refer [env]]
    [next.jdbc :refer [get-connection]]
+   [next.jdbc.sql :as sql]
    [next.jdbc.result-set :as rs]
-   [next.jdbc.sql :refer [query update!]]
    [taoensso.timbre :refer [debug]]))
 
 (def db {:dbtype   "postgresql"
@@ -15,12 +15,12 @@
 
 (def ds (get-connection db))
 
-(defn find-user-by-login [login]
-  (let [ret (query
-             ds
-             ["select * from users where login=?" login]
-             {:builder-fn rs/as-unqualified-lower-maps})]
-    (-> ret first)))
+(defn find-user [user]
+  (let [ret (sql/query ds ["select * from groups where members like ?"
+                            (str "%" user "%")])]
+    (seq ret)))
 
-(defn update-gid [user gid]
-  (update! ds :users {:gid gid} ["login=?" user]))
+(defn create [users]
+  (let [ret (sql/insert! ds :groups {:members users}
+                         {:builder-fn rs/as-unqualified-lower-maps})]
+    (:id ret)))

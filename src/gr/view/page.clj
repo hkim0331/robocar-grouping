@@ -9,7 +9,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.1.0")
+(def version "0.2.0")
 
 (defn page [& contents]
   [::response/ok
@@ -37,16 +37,31 @@
       [:hr]
       "hkimura, " version "."]])])
 
+(defn error [msg]
+ (page
+  [:h2 {:class "error"} "gr: ERROR"]
+  [:p msg]))
 
 (defn login-page []
   (page
    [:h2 "gr: Login"]
-   [:p "r99.melt と同じやつで。"
-    [:a {:href "/"} "注意事項"]]
+   [:p "r99.melt と同じやつで。"]
    (form-to
     [:post "/login"]
     (anti-forgery-field)
-    (text-field {:placeholder "ニックネーム"} "nick")
+    (text-field {:placeholder "ユーザ名"} "login")
     (password-field {:placeholder "パスワード"} "password")
     (submit-button "login"))))
 
+(defn new-group []
+  (page
+   [:h2 "gr: New"]
+   [:p "１グループは 3 人。複数のグループにはもちろん所属できない。"
+       "グループ代表者ひとりがメンバのユーザ名（半角、区切りは半角スペース）を正確に入力後、"
+       "create を押してください。追加、削除、修正はめんどくさいので、変更のないように。"]
+   (form-to
+    [:post "/group"]
+    (anti-forgery-field)
+    (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
+                "users")
+    (submit-button {:class "btn btn-danger btn-sm"} "create"))))

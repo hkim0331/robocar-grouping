@@ -1,4 +1,4 @@
-(defproject gr "0.1.0"
+(defproject gr "0.2.0"
   :description "robocar 2021 make groups app"
   :url "https://gr.melt.kyutech.ac.jp"
   :min-lein-version "2.0.0"
@@ -8,7 +8,11 @@
                  [duct/module.logging "0.5.0"]
                  [duct/module.web "0.7.3"]
                  ;;
-                 [buddy/buddy-auth "3.0.1"]]
+                 [buddy/buddy-auth "3.0.1"]
+                 [buddy/buddy-hashers "1.8.1"]
+                 [com.github.seancorfield/next.jdbc "1.2.753"]
+                 [com.taoensso/timbre "5.1.2"]
+                 [org.postgresql/postgresql "42.2.19"]]
   :plugins [[duct/lein-duct "0.12.3"]]
   :main ^:skip-aot gr.main
   :resource-paths ["resources" "target/resources"]
