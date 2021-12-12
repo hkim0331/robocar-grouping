@@ -15,6 +15,7 @@
 
     [:get  "/group/" n] [:gr.handler.core/group ^int n]
     [:post "/update" {params :form-params}] [:gr.handler.core/update params]
+    
     [:post "/del/" n] [:gr.handler.core/delete ^int n]
     ;;
     [:get "/"] [:gr.handler/example]}}
