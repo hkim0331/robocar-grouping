@@ -28,3 +28,6 @@
 (defn list-groups []
   (sql/query ds ["select * from groups order by id"]
                 {:builder-fn rs/as-unqualified-lower-maps}))
+
+(defn delete [n]
+ (sql/delete! ds :groups {:id n}))

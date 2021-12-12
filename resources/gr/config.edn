@@ -13,10 +13,7 @@
     [:post "/group" {params :form-params}]
     [:gr.handler.core/create params]
 
-    [:get  "/group/" n] [:gr.handler.core/group ^int n]
-    [:post "/update" {params :form-params}] [:gr.handler.core/update params]
-    
-    [:post "/del/" n] [:gr.handler.core/delete ^int n]
+    [:get  "/delete/" n] [:gr.handler.core/delete ^int n]
     ;;
     [:get "/"] [:gr.handler/example]}}
 
@@ -27,7 +24,7 @@
   :gr.handler.core/new    {}
   :gr.handler.core/create {}
   :gr.handler.core/group  {}
-  :gr.handler.core/update {}
+  ;;:gr.handler.core/update {}
   :gr.handler.core/delete {}
   ;;
   :gr.handler/example {}}

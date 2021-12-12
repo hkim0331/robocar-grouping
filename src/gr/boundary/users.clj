@@ -24,3 +24,6 @@
 
 (defn update-gid [user gid]
   (update! ds :users {:gid gid} ["login=?" user]))
+
+(defn delete [n]
+  (update! ds :users {:gid nil} ["gid=?" n]))
