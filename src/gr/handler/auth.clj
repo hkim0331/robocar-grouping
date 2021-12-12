@@ -21,7 +21,7 @@
   (fn [{[_ {:strs [login password]}] :ataraxy/result}]
     (timbre/debug "login" login "password" password)
     (if (and (seq login) (auth? login password))
-      (-> (redirect "/")
+      (-> (redirect "/groups")
           (assoc-in [:session :identity] (keyword login)))
       [::response/found "/login"])))
 

@@ -1,7 +1,9 @@
 # robocar 2021 grouping
 ## Unreleased
-- auth
 - update
+
+## 0.3.0-SNAPSHOT
+- auth
 
 ## 0.2.3 - 2021-12-12
 - delete

@@ -2,24 +2,30 @@
  {:duct.core/project-ns gr
 
   :duct.router/ataraxy
-  {:routes
+  {:middleware {:auth #ig/ref :gr.middleware/auth}
+
+   :routes
    {[:get  "/login"] [:gr.handler.auth/login]
     [:post "/login" {params :form-params}]
     [:gr.handler.auth/login-post params]
+    [:get  "/logout"] [:gr.handler.auth/logout]
 
-    [:get  "/groups"] [:gr.handler.core/groups]
+    [:get  "/groups"] ^:auth [:gr.handler.core/groups]
 
-    [:get  "/group"] [:gr.handler.core/new]
+    [:get  "/group"] ^:auth [:gr.handler.core/new]
     [:post "/group" {params :form-params}]
     [:gr.handler.core/create params]
 
-    [:get  "/delete/" n] [:gr.handler.core/delete ^int n]
+    [:get  "/delete/" n] ^:auth [:gr.handler.core/delete ^int n]
     ;;
     [:get "/"] [:gr.handler/example]}}
 
+  :gr.middleware/auth    {}
+
   :gr.handler.auth/login      {}
   :gr.handler.auth/login-post {}
-
+  :gr.handler.auth/logout {}
+  
   :gr.handler.core/groups {}
   :gr.handler.core/new    {}
   :gr.handler.core/create {}

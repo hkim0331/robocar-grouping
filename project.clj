@@ -1,4 +1,4 @@
-(defproject gr "0.2.3"
+(defproject gr "0.3.0-SNAPSHOT"
   :description "robocar 2021 make groups app"
   :url "https://gr.melt.kyutech.ac.jp"
   :min-lein-version "2.0.0"

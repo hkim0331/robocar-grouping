@@ -10,16 +10,19 @@
             [taoensso.timbre :as timbre]))
 
 (defmethod ig/init-key :gr.handler.core/groups [_ options]
-  (fn [{[_] :ataraxy/result}]
-    (page/list-groups (groups/list-groups))))
+  (fn [{[_] :ataraxy/result :as req}]
+    (let [admin? (= :hkimura (get-in req [:session :identity]))]
+      (page/list-groups (groups/list-groups) admin?))))
 
 (defmethod ig/init-key :gr.handler.core/new [_ options]
   (fn [{[_] :ataraxy/result}]
     (page/new-group)))
 
 (defn- validate
-  [users]
+  [uhour users]
   (let [members (str/split users #"\s+")]
+    (when (empty? uhour)
+      (throw (Exception. (str "empty class"))))
     (when (< 3 (count members))
       (throw (Exception. (str "too many members"))))
     (doseq [u members]
@@ -37,7 +40,7 @@
   (fn [{[_ {:strs [uhour users]}] :ataraxy/result :as req}]
     (timbre/debug "uhour" uhour)
     (try
-      (validate users)
+      (validate uhour users)
       (create-group uhour users)
       [::response/found "/groups"]
       (catch Exception e

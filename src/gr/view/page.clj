@@ -10,7 +10,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.2.3")
+(def version "0.3.0-SNAPSHOT")
 
 (defn page [& contents]
   [::response/ok
@@ -69,9 +69,9 @@
         (radio-button "uhour" false "thr2") "thr2 "]
     (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
                 "users")
-    (submit-button {:class "btn btn-danger btn-sm"} "create"))))
+    (submit-button {:class "btn btn-primary btn-sm"} "create"))))
 
-(defn list-groups [groups]
+(defn list-groups [groups admin?]
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
@@ -80,6 +80,7 @@
     "(" (:uhour g) ") &nbsp;"
     (:members g)
     "&nbsp;"
-    [:a {:href (str "/delete/" (:id g))} "del"]])
+    (when admin?
+      [:a {:href (str "/delete/" (:id g))} "del"])])
   [:p [:a {:href "/group" :class "btn btn-primary btn-sm"}
           "new group"]]))
