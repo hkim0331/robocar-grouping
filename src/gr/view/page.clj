@@ -37,6 +37,10 @@
       [:hr]
       "hkimura, " version "."]])])
 
+(defn error [msg]
+ (page
+  [:h2 {:class "error"} "gr: ERROR"]
+  [:p msg]))
 
 (defn login-page []
   (page
@@ -58,5 +62,6 @@
    (form-to
     [:post "/group"]
     (anti-forgery-field)
-    (text-field {:placeholder "ユーザ名を半角で区切って3人分。"} "users")
+    (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
+                "users")
     (submit-button {:class "btn btn-danger btn-sm"} "create"))))

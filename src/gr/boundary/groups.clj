@@ -16,8 +16,11 @@
 (def ds (get-connection db))
 
 (defn find-user [user]
-  (sql/query ds ["select * from groups where member like ?"
-                 (str "%" user "%")]))
+  (let [ret (sql/query ds ["select * from groups where members like ?"
+                            (str "%" user "%")])]
+    (seq ret)))
 
 (defn create [users]
-  (sql/insert! ds :groups {:members users}))
+  (let [ret (sql/insert! ds :groups {:members users}
+                         {:builder-fn rs/as-unqualified-lower-maps})]
+    (:id ret)))

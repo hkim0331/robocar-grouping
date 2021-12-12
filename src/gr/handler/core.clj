@@ -17,7 +17,6 @@
     (page/new-group)))
 
 (defn- validate
-  ""
   [users]
   (doseq [u (str/split users #"\s+")]
     (when-not (users/find-user-by-login u)
@@ -27,19 +26,17 @@
 
 (defn- create-group [users]
   (let [gid (groups/create users)]
-    (doseq [u (str/split users #"\s+")]
+    (doseq [u (str/split users #"\s")]
       (users/update-gid u gid))))
 
 (defmethod ig/init-key :gr.handler.core/create [_ options]
   (fn [{[_ {:strs [users]}] :ataraxy/result}]
-    (let [users (str/split users #"\s+")]
-      (try
-        (validate users)
-        (create-group users)
-        [::response/found "/groups"]
-        (catch Exception e
-          [::response/bad-request (.getMessage e)])))))
-
+    (try
+      (validate users)
+      (create-group users)
+      [::response/ok "/groups"] ;; no hstore extension
+      (catch Exception e
+        (page/error (str e))))))
 
 (defmethod ig/init-key :gr.handler.core/group [_ options]
   (fn [{[_] :ataraxy/result}]
