@@ -8,6 +8,10 @@
   (fn [{[_] :ataraxy/result}]
     [::response/ok "groups"]))
 
+(defmethod ig/init-key :gr.handler.core/new [_ options]
+  (fn [{[_] :ataraxy/result}]
+    [::response/ok "new"]))
+
 (defmethod ig/init-key :gr.handler.core/create [_ options]
   (fn [{[_] :ataraxy/result}]
     [::response/ok "create"]))

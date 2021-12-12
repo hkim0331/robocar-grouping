@@ -4,7 +4,10 @@
   :duct.router/ataraxy
   {:routes
    {[:get  "/groups"] [:gr.handler.core/groups]
+    
+    [:get  "/new"] [:gr.handler.core/new]
     [:post "/group" {params :form-data}] [:gr.handler.core/create params]
+
     [:get  "/group/" n] [:gr.handler.core/group ^int n]
     [:post "/update" {params :form-data}] [:gr.handler.core/update params]
     [:post "/del/" n] [:gr.handler.core/delete ^int n]
@@ -12,6 +15,7 @@
     [:get "/example"] [:gr.handler/example]}}
 
   :gr.handler.core/groups {}
+  :gr.handler.core/new    {}
   :gr.handler.core/create {}
   :gr.handler.core/group  {}
   :gr.handler.core/update {}
