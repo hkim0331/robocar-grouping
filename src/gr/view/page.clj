@@ -9,7 +9,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.2.0-SNAPSHOT")
+(def version "0.2.0")
 
 (defn page [& contents]
   [::response/ok
