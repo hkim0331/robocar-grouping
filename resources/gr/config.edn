@@ -3,8 +3,12 @@
 
   :duct.router/ataraxy
   {:routes
-   {[:get  "/groups"] [:gr.handler.core/groups]
-    
+   {[:get  "/login"] [:gr.handler.auth/login]
+    [:post "/login" {params :form-params}]
+    [:gr.handler.auth/login-post params]
+
+    [:get  "/groups"] [:gr.handler.core/groups]
+
     [:get  "/new"] [:gr.handler.core/new]
     [:post "/group" {params :form-data}] [:gr.handler.core/create params]
 
@@ -12,7 +16,10 @@
     [:post "/update" {params :form-data}] [:gr.handler.core/update params]
     [:post "/del/" n] [:gr.handler.core/delete ^int n]
     ;;
-    [:get "/example"] [:gr.handler/example]}}
+    [:get "/"] [:gr.handler/example]}}
+
+  :gr.handler.auth/login      {}
+  :gr.handler.auth/login-post {}
 
   :gr.handler.core/groups {}
   :gr.handler.core/new    {}
