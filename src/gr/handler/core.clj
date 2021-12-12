@@ -10,7 +10,7 @@
 
 (defmethod ig/init-key :gr.handler.core/groups [_ options]
   (fn [{[_] :ataraxy/result}]
-    [::response/ok "groups"]))
+    (page/list-groups (groups/list-groups))))
 
 (defmethod ig/init-key :gr.handler.core/new [_ options]
   (fn [{[_] :ataraxy/result}]
@@ -25,7 +25,7 @@
       (when-not (users/find-user-by-login u)
         (throw (Exception. (str u " is not found"))))
       (when (groups/find-user u)
-        (throw (Exception. (str u " already belong other group")))))))
+        (throw (Exception. (str u " already belong to other group")))))))
 
 (defn- create-group [users]
   (let [gid (groups/create users)]
@@ -37,7 +37,7 @@
     (try
       (validate users)
       (create-group users)
-      [::response/ok "/groups"]
+      [::response/found "/groups"]
       (catch Exception e
         (page/error (str e))))))
 

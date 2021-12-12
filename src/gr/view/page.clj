@@ -9,7 +9,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.2.0")
+(def version "0.2.1")
 
 (defn page [& contents]
   [::response/ok
@@ -65,3 +65,10 @@
     (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
                 "users")
     (submit-button {:class "btn btn-danger btn-sm"} "create"))))
+
+(defn list-groups [groups]
+ (page
+  [:h2 "gr: Groups"]
+  (for [g groups]
+   (str "<p>" (:id g) "&nbsp;" (:members g) "</p>"))
+  [:p [:a {:href "/group" :class "btn btn-primary btn-sm"} "new group"]]))
