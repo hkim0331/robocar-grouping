@@ -18,11 +18,14 @@
 
 (defn- validate
   [users]
-  (doseq [u (str/split users #"\s+")]
-    (when-not (users/find-user-by-login u)
-      (throw (Exception. (str u " is not found"))))
-    (when (groups/find-user u)
-      (throw (Exception. (str u " already belong other group"))))))
+  (let [members (str/split users #"\s+")]
+    (when (< 3 (count members))
+      (throw (Exception. (str "too many members"))))
+    (doseq [u members]
+      (when-not (users/find-user-by-login u)
+        (throw (Exception. (str u " is not found"))))
+      (when (groups/find-user u)
+        (throw (Exception. (str u " already belong other group")))))))
 
 (defn- create-group [users]
   (let [gid (groups/create users)]
@@ -34,7 +37,7 @@
     (try
       (validate users)
       (create-group users)
-      [::response/ok "/groups"] ;; no hstore extension
+      [::response/ok "/groups"]
       (catch Exception e
         (page/error (str e))))))
 
