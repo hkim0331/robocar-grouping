@@ -1,0 +1,27 @@
+{:duct.profile/base
+ {:duct.core/project-ns gr
+
+  :duct.router/ataraxy
+  {:routes
+   {[:get  "/groups"] [:gr.handler.core/groups]
+    [:post "/group" {params :form-data}] [:gr.handler.core/create params]
+    [:get  "/group/" n] [:gr.handler.core/group ^int n]
+    [:post "/update" {params :form-data}] [:gr.handler.core/update params]
+    [:post "/del/" n] [:gr.handler.core/delete ^int n]
+    ;;
+    [:get "/example"] [:gr.handler/example]}}
+
+  :gr.handler.core/groups {}
+  :gr.handler.core/create {}
+  :gr.handler.core/group  {}
+  :gr.handler.core/update {}
+  :gr.handler.core/delete {}
+  ;;
+  :gr.handler/example {}}
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod  {}
+
+ :duct.module/logging {}
+ :duct.module.web/site {}}
