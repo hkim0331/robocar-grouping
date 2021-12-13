@@ -3,9 +3,12 @@
 - only admin can update groups.
 - robocar number?
 - group scores?
-- Exception in thread "Thread-9" 
+- Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
 
+## 0.4.1 - 2021-12-13
+- members must be three.
+- remove libraries that are not used.
 
 ## 0.4.0 - 2021-12-13
 - forbidden duplicate same user name in a group.
