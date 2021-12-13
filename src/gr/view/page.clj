@@ -32,7 +32,10 @@
     [:title "gr"]
     [:body
      [:div {:class "container"}
-      [:p {:class "develop"} "開発中。ユーザ名をテキトーに R99 から拾ってテストしてます。明日の授業開始前にクリアします。"]
+      [:p {:class "develop"} "開発中。"
+       "ユーザ名をテキトーに R99 から拾って作ったり消したりテストしてます。"
+       "明日の授業開始前にクリアします。"]
+      [:p {:class "develop"} "この赤メッセージ消えたら本番です。"]
       contents
       [:p]
       [:p [:a {:href "/logout" :class "btn btn-warning btn-sm"} "logout"]]
