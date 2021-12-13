@@ -1,14 +1,14 @@
 (ns gr.view.page
   (:require
    [ataraxy.response :as response]
-   [clojure.string :as str]
+   #_[clojure.string :as str]
    [hiccup.page :refer [html5]]
    [hiccup.form :refer [form-to text-field password-field submit-button
                         label text-area file-upload hidden-field
                         radio-button]]
-   [hiccup.util :refer [escape-html]]
+   #_[hiccup.util :refer [escape-html]]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
-   [taoensso.timbre :as timbre :refer [debug]]))
+   #_[taoensso.timbre :as timbre :refer [debug]]))
 
 (def version "0.4.0")
 
