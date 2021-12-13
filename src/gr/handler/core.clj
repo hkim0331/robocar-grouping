@@ -1,7 +1,6 @@
 (ns gr.handler.core
-  (:require [ataraxy.core :as ataraxy]
+  (:require #_[ataraxy.core :as ataraxy]
             [ataraxy.response :as response]
-            [clojure.java.io :as io]
             [clojure.string :as str]
             [gr.boundary.users :as users]
             [gr.boundary.groups :as groups]
@@ -9,22 +8,33 @@
             [integrant.core :as ig]
             [taoensso.timbre :as timbre]))
 
+(defn- user [req]
+  (get-in req [:session :identity]))
+
+(defn- admin? [req]
+  (= :hkimura (user req)))
+
 (defmethod ig/init-key :gr.handler.core/groups [_ options]
   (fn [{[_] :ataraxy/result :as req}]
-    (let [admin? (= :hkimura (get-in req [:session :identity]))]
-      (page/list-groups (groups/list-groups) admin?))))
+    (page/list-groups (groups/list-groups) (admin? req))))
 
 (defmethod ig/init-key :gr.handler.core/new [_ options]
   (fn [{[_] :ataraxy/result}]
     (page/new-group)))
 
 (defn- validate
-  [uhour users]
+  "(= user hkimura)の時はちょいと緩める"
+  [uhour users user]
   (let [members (str/split users #"\s+")]
     (when (empty? uhour)
       (throw (Exception. (str "empty class"))))
-    (when (< 3 (count members))
-      (throw (Exception. (str "too many members"))))
+    (when-not (or (str/includes? users user) (= "hkimura" user))
+      (throw (Exception. "are you a member of the group?")))
+    (when-not (or (= 3 (count members)) (= "hkimura" user))
+      (throw (Exception. (str "members must be three"))))
+    (when-not (= (count members)
+                 (count (distinct (str/split users #"\s+"))))
+      (throw (Exception. (str "found duplicates in members"))))
     (doseq [u members]
       (when-not (users/find-user-by-login u)
         (throw (Exception. (str u " is not found"))))
@@ -40,9 +50,9 @@
   (fn [{[_ {:strs [uhour users]}] :ataraxy/result :as req}]
     (timbre/debug "uhour" uhour)
     (try
-      (validate uhour users)
+      (validate uhour users (name (user req)))
       (create-group uhour users)
-      [::response/found "/groups"]
+      [::response/found "/"]
       (catch Exception e
         (page/error (str e))))))
 
@@ -58,4 +68,4 @@
   (fn [{[_ n] :ataraxy/result}]
     (groups/delete n)
     (users/delete n)
-    [::response/found "/groups"]))
+    [::response/found "/"]))

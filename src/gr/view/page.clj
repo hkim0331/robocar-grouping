@@ -1,16 +1,16 @@
 (ns gr.view.page
   (:require
    [ataraxy.response :as response]
-   [clojure.string :as str]
+   #_[clojure.string :as str]
    [hiccup.page :refer [html5]]
    [hiccup.form :refer [form-to text-field password-field submit-button
                         label text-area file-upload hidden-field
                         radio-button]]
-   [hiccup.util :refer [escape-html]]
+   #_[hiccup.util :refer [escape-html]]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
-   [taoensso.timbre :as timbre :refer [debug]]))
+   #_[taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.3.0")
+(def version "0.4.1")
 
 (defn page [& contents]
   [::response/ok
@@ -32,6 +32,10 @@
     [:title "gr"]
     [:body
      [:div {:class "container"}
+      [:p {:class "develop"} "開発中。"
+       "ユーザ名をテキトーに R99 から拾って作ったり消したりテストしてます。"
+       "明日の授業開始前にクリアします。"]
+      [:p {:class "develop"} "この赤メッセージ消えたら本番です。"]
       contents
       [:p]
       [:p [:a {:href "/logout" :class "btn btn-warning btn-sm"} "logout"]]
@@ -58,8 +62,9 @@
   (page
    [:h2 "gr: New"]
    [:p "１グループは 3 人。複数のグループにはもちろん所属できない。"
-       "グループ代表者ひとりがメンバのユーザ名（半角、区切りは半角スペース）を正確に入力後、"
-       "create を押してください。追加、削除、修正はめんどくさいので、変更のないように。"]
+       "グループ代表者ひとりがメンバのユーザ名
+        （大文字・小文字・全角文字を正確に、区切りは半角スペース）を正確に入力後、"
+       "create を押してください。追加、削除、修正はめんどくさいので、変更のないよう。"]
    (form-to
     [:post "/group"]
     (anti-forgery-field)
@@ -67,7 +72,7 @@
         (radio-button "uhour" false "tue2") "tue2 "
         (radio-button "uhour" false "thr1") "thr1 "
         (radio-button "uhour" false "thr2") "thr2 "]
-    (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
+    (text-field {:placeholder "ユーザ名を半角スペースで区切って3人分。" :id "group"}
                 "users")
     (submit-button {:class "btn btn-primary btn-sm"} "create"))))
 
@@ -75,12 +80,12 @@
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
-   [:p
-    (:id g) "&nbsp;"
-    "(" (:uhour g) ") &nbsp;"
-    (:members g)
-    "&nbsp;"
-    (when admin?
-      [:a {:href (str "/delete/" (:id g))} "del"])])
+    [:p
+     (:id g) "&nbsp;"
+     "(" (:uhour g) ") &nbsp;"
+     (:members g)
+     "&nbsp;"
+     (when admin?
+       [:a {:href (str "/delete/" (:id g))} "del"])])
   [:p [:a {:href "/group" :class "btn btn-primary btn-sm"}
-          "new group"]]))
+       "new group"]]))

@@ -3,8 +3,7 @@
    [environ.core :refer [env]]
    [next.jdbc :refer [get-connection]]
    [next.jdbc.sql :as sql]
-   [next.jdbc.result-set :as rs]
-   [taoensso.timbre :refer [debug]]))
+   [next.jdbc.result-set :as rs]))
 
 (def db {:dbtype   "postgresql"
          :host     (env :r99c-host)
@@ -17,7 +16,7 @@
 
 (defn find-user [user]
   (let [ret (sql/query ds ["select * from groups where members like ?"
-                            (str "%" user "%")])]
+                           (str "%" user "%")])]
     (seq ret)))
 
 (defn create [uhour users]
@@ -27,7 +26,7 @@
 
 (defn list-groups []
   (sql/query ds ["select * from groups order by id"]
-                {:builder-fn rs/as-unqualified-lower-maps}))
+             {:builder-fn rs/as-unqualified-lower-maps}))
 
 (defn delete [n]
- (sql/delete! ds :groups {:id n}))
+  (sql/delete! ds :groups {:id n}))
