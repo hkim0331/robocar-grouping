@@ -9,9 +9,12 @@
             [integrant.core :as ig]
             [taoensso.timbre :as timbre]))
 
+(defn- user [req]
+ (get-in req [:session :identity]))
+
 (defmethod ig/init-key :gr.handler.core/groups [_ options]
   (fn [{[_] :ataraxy/result :as req}]
-    (let [admin? (= :hkimura (get-in req [:session :identity]))]
+    (let [admin? (= :hkimura (user req))]
       (page/list-groups (groups/list-groups) admin?))))
 
 (defmethod ig/init-key :gr.handler.core/new [_ options]
@@ -19,10 +22,12 @@
     (page/new-group)))
 
 (defn- validate
-  [uhour users]
+  [uhour users user]
   (let [members (str/split users #"\s+")]
     (when (empty? uhour)
       (throw (Exception. (str "empty class"))))
+    (when-not (str/includes? user users)
+      (throw (Exception. "are you a member of the group?")))
     (when (< 3 (count members))
       (throw (Exception. (str "too many members"))))
     (doseq [u members]
@@ -40,7 +45,7 @@
   (fn [{[_ {:strs [uhour users]}] :ataraxy/result :as req}]
     (timbre/debug "uhour" uhour)
     (try
-      (validate uhour users)
+      (validate uhour users (user req))
       (create-group uhour users)
       [::response/found "/"]
       (catch Exception e

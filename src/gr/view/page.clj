@@ -10,7 +10,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.3.1")
+(def version "0.3.2")
 
 (defn page [& contents]
   [::response/ok
@@ -32,6 +32,7 @@
     [:title "gr"]
     [:body
      [:div {:class "container"}
+      [:p {:class "develop"} "開発中です。グループは開発用のものです。"]
       contents
       [:p]
       [:p [:a {:href "/logout" :class "btn btn-warning btn-sm"} "logout"]]

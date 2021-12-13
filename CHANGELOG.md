@@ -1,9 +1,13 @@
 # robocar 2021 grouping
 ## Unreleased
 - update groups
-- top page
 
-## 
+## 0.3.2 - 2021-12-13
+- can create a group only if he is a member of the group
+which will be created. only members can create their entry.
+
+## 0.3.1 - 2021-12-13
+- top page
 
 ## 0.3.0 - 2021-12-12
 - auth
