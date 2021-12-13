@@ -59,8 +59,9 @@
   (page
    [:h2 "gr: New"]
    [:p "１グループは 3 人。複数のグループにはもちろん所属できない。"
-       "グループ代表者ひとりがメンバのユーザ名（半角、区切りは半角スペース）を正確に入力後、"
-       "create を押してください。追加、削除、修正はめんどくさいので、変更のないように。"]
+       "グループ代表者ひとりがメンバのユーザ名
+        （大文字・小文字・全角文字を正確に、区切りは半角スペース）を正確に入力後、"
+       "create を押してください。追加、削除、修正はめんどくさいので、変更のないよう。"]
    (form-to
     [:post "/group"]
     (anti-forgery-field)
@@ -68,7 +69,7 @@
         (radio-button "uhour" false "tue2") "tue2 "
         (radio-button "uhour" false "thr1") "thr1 "
         (radio-button "uhour" false "thr2") "thr2 "]
-    (text-field {:placeholder "ユーザ名を半角で区切って3人分。" :id "group"}
+    (text-field {:placeholder "ユーザ名を半角スペースで区切って3人分。" :id "group"}
                 "users")
     (submit-button {:class "btn btn-primary btn-sm"} "create"))))
 
