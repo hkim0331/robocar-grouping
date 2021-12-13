@@ -10,7 +10,7 @@
    [ring.util.anti-forgery :refer [anti-forgery-field]]
    [taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.3.0")
+(def version "0.3.1")
 
 (defn page [& contents]
   [::response/ok
@@ -75,12 +75,12 @@
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
-   [:p
-    (:id g) "&nbsp;"
-    "(" (:uhour g) ") &nbsp;"
-    (:members g)
-    "&nbsp;"
-    (when admin?
-      [:a {:href (str "/delete/" (:id g))} "del"])])
+    [:p
+     (:id g) "&nbsp;"
+     "(" (:uhour g) ") &nbsp;"
+     (:members g)
+     "&nbsp;"
+     (when admin?
+       [:a {:href (str "/delete/" (:id g))} "del"])])
   [:p [:a {:href "/group" :class "btn btn-primary btn-sm"}
-          "new group"]]))
+       "new group"]]))
