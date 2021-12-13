@@ -1,9 +1,10 @@
 # robocar 2021 grouping
 ## Unreleased
 - update groups
-- top page
+- user can create a group in which herself must be included as a member.
 
-## 
+## 0.3.1 - 2021-12-13
+- top page
 
 ## 0.3.0 - 2021-12-12
 - auth
