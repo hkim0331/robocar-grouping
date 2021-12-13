@@ -1,6 +1,10 @@
 # robocar 2021 grouping
 ## Unreleased
-- update groups
+- only admin can update groups.
+
+## 0.3.3 - 2021-12-13
+- forbidden duplicate same user name in a group.
+- admin can make any groups unless validation fails.
 
 ## 0.3.2 - 2021-12-13
 - can create a group only if he is a member of the group
