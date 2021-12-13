@@ -42,7 +42,7 @@
     (try
       (validate uhour users)
       (create-group uhour users)
-      [::response/found "/groups"]
+      [::response/found "/"]
       (catch Exception e
         (page/error (str e))))))
 
@@ -58,4 +58,4 @@
   (fn [{[_ n] :ataraxy/result}]
     (groups/delete n)
     (users/delete n)
-    [::response/found "/groups"]))
+    [::response/found "/"]))

@@ -10,30 +10,30 @@
     [:gr.handler.auth/login-post params]
     [:get  "/logout"] [:gr.handler.auth/logout]
 
-    [:get  "/groups"] ^:auth [:gr.handler.core/groups]
+    [:get  "/"] ^:auth [:gr.handler.core/groups]
 
     [:get  "/group"] ^:auth [:gr.handler.core/new]
     [:post "/group" {params :form-params}]
     [:gr.handler.core/create params]
 
-    [:get  "/delete/" n] ^:auth [:gr.handler.core/delete ^int n]
+    [:get  "/delete/" n] ^:auth [:gr.handler.core/delete ^int n]}}
     ;;
-    [:get "/"] [:gr.handler/example]}}
+    ;;[:get "/"] [:gr.handler/example]}}
 
   :gr.middleware/auth    {}
 
   :gr.handler.auth/login      {}
   :gr.handler.auth/login-post {}
   :gr.handler.auth/logout {}
-  
+
   :gr.handler.core/groups {}
   :gr.handler.core/new    {}
   :gr.handler.core/create {}
   :gr.handler.core/group  {}
   ;;:gr.handler.core/update {}
-  :gr.handler.core/delete {}
+  :gr.handler.core/delete {}}
   ;;
-  :gr.handler/example {}}
+  ;;:gr.handler/example {}}
 
  :duct.profile/dev   #duct/include "dev"
  :duct.profile/local #duct/include "local"
