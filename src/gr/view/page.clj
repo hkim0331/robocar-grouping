@@ -32,7 +32,7 @@
     [:title "gr"]
     [:body
      [:div {:class "container"}
-      [:p {:class "develop"} "開発中です。グループは開発用のものです。"]
+      [:p {:class "develop"} "開発中。ユーザ名をテキトーに R99 から拾ってテストしてます。明日の授業開始前にクリアします。"]
       contents
       [:p]
       [:p [:a {:href "/logout" :class "btn btn-warning btn-sm"} "logout"]]
