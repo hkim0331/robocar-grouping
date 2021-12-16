@@ -1,11 +1,12 @@
 # robocar 2021 grouping
+
 ## Unreleased
 - only admin can update groups.
 - robocar number?
 - group scores?
-- Exception in thread "Thread-9" 
+- Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
-
+- [BUG] user name substring match.
 
 ## 0.4.0 - 2021-12-13
 - forbidden duplicate same user name in a group.
