@@ -6,6 +6,8 @@
 - Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
 
+- BUG: user names with their substrings.
+
 ## 0.4.2 - 2021-12-13
 - removed development line in page.clj.
 
