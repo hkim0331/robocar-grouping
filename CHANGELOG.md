@@ -6,6 +6,9 @@
 - Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
 
+## 0.4.2 - 2021-12-13
+- removed development line in page.clj.
+
 ## 0.4.1 - 2021-12-13
 - members must be three.
 - remove libraries that are not used.

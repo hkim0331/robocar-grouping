@@ -1,3 +1,8 @@
 input#group {width: 400px;}
 .error {color: red;}
 .develop {font-size: large; color: red;}
+
+.tue1 {background-color: #ffccff;}
+.tue2 {background-color: #ccccff;}
+.thr1 {background-color: #ccffff;}
+.thr2 {background-color: #ccffcc;}
