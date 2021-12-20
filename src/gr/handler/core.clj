@@ -1,7 +1,6 @@
 (ns gr.handler.core
-  (:require [ataraxy.core :as ataraxy]
+  (:require #_[ataraxy.core :as ataraxy]
             [ataraxy.response :as response]
-            [clojure.java.io :as io]
             [clojure.string :as str]
             [gr.boundary.users :as users]
             [gr.boundary.groups :as groups]
@@ -31,8 +30,8 @@
       (throw (Exception. (str "empty class"))))
     (when-not (or (str/includes? users user) (= "hkimura" user))
       (throw (Exception. "are you a member of the group?")))
-    (when (and (< 3 (count members)) (not (= "hkimura" user)))
-      (throw (Exception. (str "too many members"))))
+    (when-not (or (= 3 (count members)) (= "hkimura" user))
+      (throw (Exception. (str "members must be three"))))
     (when-not (= (count members)
                  (count (distinct (str/split users #"\s+"))))
       (throw (Exception. (str "found duplicates in members"))))

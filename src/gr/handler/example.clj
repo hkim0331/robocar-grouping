@@ -1,5 +1,5 @@
 (ns gr.handler.example
-  (:require [ataraxy.core :as ataraxy]
+  (:require #_[ataraxy.core :as ataraxy]
             [ataraxy.response :as response] 
             [clojure.java.io :as io]
             [integrant.core :as ig]))

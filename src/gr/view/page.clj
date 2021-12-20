@@ -1,16 +1,16 @@
 (ns gr.view.page
   (:require
    [ataraxy.response :as response]
-   [clojure.string :as str]
+   #_[clojure.string :as str]
    [hiccup.page :refer [html5]]
    [hiccup.form :refer [form-to text-field password-field submit-button
                         label text-area file-upload hidden-field
                         radio-button]]
-   [hiccup.util :refer [escape-html]]
+   #_[hiccup.util :refer [escape-html]]
    [ring.util.anti-forgery :refer [anti-forgery-field]]
-   [taoensso.timbre :as timbre :refer [debug]]))
+   #_[taoensso.timbre :as timbre :refer [debug]]))
 
-(def version "0.4.0")
+(def version "0.4.2")
 
 (defn page [& contents]
   [::response/ok
@@ -32,15 +32,11 @@
     [:title "gr"]
     [:body
      [:div {:class "container"}
-      [:p {:class "develop"} "開発中。"
-       "ユーザ名をテキトーに R99 から拾って作ったり消したりテストしてます。"
-       "明日の授業開始前にクリアします。"]
-      [:p {:class "develop"} "この赤メッセージ消えたら本番です。"]
       contents
       [:p]
       [:p [:a {:href "/logout" :class "btn btn-warning btn-sm"} "logout"]]
       [:hr]
-      "hkimura, " version "."]])])
+      version]])])
 
 (defn error [msg]
  (page
@@ -80,12 +76,13 @@
  (page
   [:h2 "gr: Groups"]
   (for [g groups]
-    [:p
+    [:div {:class (:uhour g)}
      (:id g) "&nbsp;"
      "(" (:uhour g) ") &nbsp;"
      (:members g)
      "&nbsp;"
      (when admin?
        [:a {:href (str "/delete/" (:id g))} "del"])])
+  [:br]
   [:p [:a {:href "/group" :class "btn btn-primary btn-sm"}
        "new group"]]))

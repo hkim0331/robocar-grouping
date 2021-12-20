@@ -4,7 +4,7 @@
    [next.jdbc :refer [get-connection]]
    [next.jdbc.result-set :as rs]
    [next.jdbc.sql :refer [query update!]]
-   [taoensso.timbre :refer [debug]]))
+   #_[taoensso.timbre :refer [debug]]))
 
 (def db {:dbtype   "postgresql"
          :host     (env :r99c-host)
