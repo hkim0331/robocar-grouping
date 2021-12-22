@@ -2,7 +2,6 @@
 
 robocar 2021 grouping app.
 
-
 ## Developing
 
 ### Setup

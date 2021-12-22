@@ -25,7 +25,7 @@
     (:id ret)))
 
 (defn list-groups []
-  (sql/query ds ["select * from groups order by id"]
+  (sql/query ds ["select * from groups order by uhour, id"]
              {:builder-fn rs/as-unqualified-lower-maps}))
 
 (defn delete [n]

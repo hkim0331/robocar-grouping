@@ -1,6 +1,22 @@
 # robocar 2021 grouping
+
 ## Unreleased
 - only admin can update groups.
+- robocar number?
+- group scores?
+- Exception in thread "Thread-9"
+Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
+- BUG: user names matches their substring names.
+
+## 0.4.3 - 2021-12-22
+- order by uhour, id
+
+## 0.4.2 - 2021-12-13
+- removed development line in page.clj.
+
+## 0.4.1 - 2021-12-13
+- members must be three.
+- remove libraries that are not used.
 
 ## 0.4.0 - 2021-12-13
 - forbidden duplicate same user name in a group.
