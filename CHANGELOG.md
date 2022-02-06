@@ -7,6 +7,9 @@
 - Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
 - evaluate students' performances with Zono.
+- user `naka` to admin
+- disable `del` and `new group` buttons.
+
 
 ## 0.5.0-SNAPSHOT
 
