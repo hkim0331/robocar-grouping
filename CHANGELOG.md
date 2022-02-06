@@ -1,12 +1,18 @@
 # robocar 2021 grouping
+
 ## Unreleased
 - only admin can update groups.
 - robocar number?
 - group scores?
 - Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
+- evaluate students' performances with Zono.
 
-- BUG: user names with their substrings.
+## 0.5.0-SNAPSHOT
+
+
+## 0.4.3
+- manually fixed in database: bug: user names with their substrings.
 
 ## 0.4.2 - 2021-12-13
 - removed development line in page.clj.
