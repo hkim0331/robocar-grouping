@@ -13,6 +13,10 @@ Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandl
 
 ## 0.4.3
 - manually fixed in database: bug: user names with their substrings.
+- BUG: user names matches their substring names.
+
+## 0.4.3 - 2021-12-22
+- order by uhour, id
 
 ## 0.4.2 - 2021-12-13
 - removed development line in page.clj.
