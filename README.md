@@ -2,6 +2,9 @@
 
 robocar 2021 grouping app.
 
+origin  ssh://git@github.com/hkim0331/robocar-grouping.git (fetch)
+origin  ssh://git@github.com/hkim0331/robocar-grouping.git (push)
+
 ## Developing
 
 ### Setup

@@ -6,6 +6,16 @@
 - group scores?
 - Exception in thread "Thread-9"
 Exception: java.lang.NoClassDefFoundError thrown from the UncaughtExceptionHandler in thread "Thread-9"
+- evaluate students' performances with Zono.
+- user `naka` to admin
+- disable `del` and `new group` buttons.
+
+
+## 0.5.0-SNAPSHOT
+
+
+## 0.4.3
+- manually fixed in database: bug: user names with their substrings.
 - BUG: user names matches their substring names.
 
 ## 0.4.3 - 2021-12-22
